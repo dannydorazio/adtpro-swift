@@ -1,8 +1,12 @@
-.settings
-.fbwarnings
-ADTPro.properties
-ADTProTrace.txt
-dest/
-tasks/
-/bin/
 .DS_Store
+
+# Swift package and Xcode (ADTPro.xcodeproj is generated from project.yml by XcodeGen)
+/.build/
+/.swiftpm/
+/ADTPro.xcodeproj/
+/App/Info.plist
+xcuserdata/
+DerivedData/
+
+# Files a running host may leave in its working directory
+ADTProTrace.txt
