@@ -1,6 +1,6 @@
-# Got an old Apple computer you want to talk to?
+# ADTPro, now in Swift
 
-Apple Disk Transfer ProDOS (ADTPro) transfers physical disks and disk images between Apple II-era computers and the modern world. It can even get your Apple running if you don't have any disks at all. The 8-bit Apple (client) component runs on any Apple II or Apple /// compatible computer with 64k of memory or more.
+Got an old Apple computer you want to talk to? Apple Disk Transfer ProDOS (ADTPro) transfers physical disks and disk images between Apple II-era computers and the modern world. It can even get your Apple running if you don't have any disks at all. The 8-bit Apple (client) component runs on any Apple II or Apple /// compatible computer with 64k of memory or more.
 
 This fork replaces the Java host with a native Swift one: a SwiftUI app on macOS, and a command line host for macOS and Linux. The Apple clients are unchanged and speak the same protocol.
 
