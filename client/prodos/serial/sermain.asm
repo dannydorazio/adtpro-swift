@@ -1,6 +1,6 @@
 ;
 ; ADTPro - Apple Disk Transfer ProDOS
-; Copyright (C) 2008 - 2014 by David Schmidt
+; Copyright (C) 2006 - 2012 by David Schmidt
 ; 1110325+david-schmidt@users.noreply.github.com
 ;
 ; This program is free software; you can redistribute it and/or modify it 
@@ -18,59 +18,38 @@
 ; 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 ;
 
-	.include "sos/interp.asm"	; Interpreter header
-	.include "sos/sosmacros.i"	; OS macros
-	.include "sos/sosconst.i"	; OS equates, characters, etc.
-	.include "sos/sosvars.asm"
-	.include "sos/serial/sermessages.asm"	; Messages
-	.include "../../build/lib/ip65/inc/common.inc"	; More macros - ldax, for example
-
-	.include "main.asm"
+	.include "prodos/interp.asm"			; Interpreter header
+	.include "prodos/prodosmacros.i"		; OS macros
+	.include "prodos/prodosconst.i"			; OS equates, characters, etc.
+	.include "lib/ip65/inc/common.inc"
+	.include "diskii.asm"				; Contains positionally dependent format code
 
 ;---------------------------------------------------------
 ; Pull in all the rest of the code
 ;---------------------------------------------------------
+	.include "main.asm"
 	.include "about.asm"
-	.include "sos/rawio.asm"	; Apple II-like I/O stand-in
-	.include "sos/conio.asm"	; Console I/O
+	.include "prodos/prodosvars.asm"		; Variables
+	.include "prodos/serial/sermessages.asm"	; Messages
+	.include "prodos/conio.asm"		; Console I/O
 	.include "print.asm"
 	.include "prodos/serial/serproto.asm"
-	.include "sos/online.asm"
-	.include "sos/rw.asm"
+	.include "prodos/online.asm"
+	.include "prodos/rw.asm"
 	.include "sr.asm"
+	.include "prodos/serial/findslot.asm"
 	.include "prodos/serial/ssc.asm"
-	.include "sos/serial/iiiacia.asm"
+	.include "prodos/serial/iigsscc.asm"
 	.include "prodos/serial/timer.asm"
 	.include "crc.asm"
 	.include "pickvol.asm"
 	.include "input.asm"
-	.include "sos/serial/serconfigsos.asm"
+	.include "prodos/serial/serconfigpro.asm"
 	.include "hostfns.asm"
-	.include "sos/format.asm"			; Note: includes FORMAT segment
+	.include "nibble.asm"
+	.include "prodos/serial/pascalep.asm"	; Note: includes PASCALEP segment
+	.include "prodos/format.asm"		; Note: includes FORMAT segment
 	.include "bsave.asm"
 
-; From Nibble code:
-; Note: we could use all of the Disk II functions if we resolve the BIGBUF references 
-; in diskii.asm, specifically ADR_TRK.  Also, there are some page boundary requirements
-; that would have to be respected. 
-motoron:
-motoroff:
-INIT_DISKII:
-GO_TRACK0:
-sendnib:
-	rts
-; Stubs:
-ROM:
-;BSAVE:
-DevAdr:
-DevList:
-DevCnt:
-PEND:
-TBL_ONLINE:
-UNIT:
-DEVLST:
-DEVICE:
-KEYBUFF:
-ZDEVCNT:
-DEVCNT:
 	.segment "DATA"
+	

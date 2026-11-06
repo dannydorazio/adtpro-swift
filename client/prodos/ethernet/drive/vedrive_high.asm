@@ -49,10 +49,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ******************************************************************************/
 
-.include "../../build/lib/ip65/inc/common.inc"
-.include "../../build/lib/ip65/inc/commonprint.inc"
-.include "../../build/lib/ip65/inc/net.inc"
-.include "../../build/lib/ip65/inc/error.inc"
+.include "lib/ip65/inc/common.inc"
+.include "lib/ip65/inc/commonprint.inc"
+.include "lib/ip65/inc/net.inc"
+.include "lib/ip65/inc/error.inc"
 
 .import dns_hostname_is_dotted_quad
 .import dns_ip

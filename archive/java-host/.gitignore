@@ -1,0 +1,7 @@
+.settings
+.fbwarnings
+ADTPro.properties
+ADTProTrace.txt
+dest/
+tasks/
+/bin/

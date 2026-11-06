@@ -1,6 +1,6 @@
 ;
 ; ADTPro - Apple Disk Transfer ProDOS
-; Copyright (C) 2007 - 2012 by David Schmidt
+; Copyright (C) 2006 - 2013 by David Schmidt
 ; 1110325+david-schmidt@users.noreply.github.com
 ;
 ; This program is free software; you can redistribute it and/or modify it 
@@ -18,38 +18,59 @@
 ; 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 ;
 
-	.include "prodos/interp.asm"			; Interpreter header
-	.include "prodos/prodosmacros.i"		; OS macros
-	.include "prodos/prodosconst.i"			; OS equates, characters, etc.
-	.include "../../build/lib/ip65/inc/common.inc"
-	.include "diskii.asm"					; Contains positionally dependent format code
+	.include "sos/interp.asm"	; Interpreter header - INTERP segment
+	.include "sos/sosmacros.i"	; OS macros
+	.include "sos/sosconst.i"	; OS equates, characters, etc.
+	.include "sos/sosvars.asm"	; DATA segment
+	.include "sos/ethernet/ethmessages.asm"	; Messages - DATA segment
+	.include "lib/ip65/inc/common.inc"	; More macros - ldax, for example
+
+	.include "main.asm"	; STARTUP segment
 
 ;---------------------------------------------------------
 ; Pull in all the rest of the code
 ;---------------------------------------------------------
-	.include "main.asm"
-	.include "prodos/audio/about.asm"		; Test tone generation in addition to 'about' message
-	.include "prodos/prodosvars.asm"		; Variables
-	.include "prodos/serial/sermessages.asm"	; Messages
-	.include "prodos/conio.asm"		; Console I/O
+	.include "about.asm"
+	.include "sos/rawio.asm"	; Console I/O
+	.include "sos/conio.asm"	; Console I/O
 	.include "print.asm"
-	.include "prodos/audio/audproto.asm"
-	.include "prodos/online.asm"
-	.include "prodos/rw.asm"
+	.include "sos/online.asm"
+	.include "sos/rw.asm"
 	.include "sr.asm"
-	.include "prodos/audio/audio.asm"
 	.include "crc.asm"
 	.include "pickvol.asm"
 	.include "input.asm"
-	.include "prodos/audio/audconfig.asm"
 	.include "hostfns.asm"
-	.include "prodos/format.asm"
+	.include "prodos/ethernet/ethproto.asm"
+	.include "prodos/ethernet/uther.asm"
+	.include "sos/ethernet/ethconfig.asm"
+	.include "sos/ethernet/ipconfig.asm"
+	.include "sos/format.asm"		; FORMAT segment
 	.include "bsave.asm"
 
-; Stubs from nibble-related stuff
+; Stubs from Disk II-related stuff
 ReceiveNib:
+GO_TRACK0:
+INIT_DISKII:
 sendnib:
+motoron:
+motoroff:
 	rts
 
+; Temp storage re-used from nibble code - but didn't exist in SOS version, so claim it here 
+RS_TEMP:	.byte $00
+
+; Stubs:
+ROM:
+DevAdr:
+DevList:
+DevCnt:
 PEND:
-	.segment "DATA"
+TBL_ONLINE:
+UNIT:
+DEVLST:
+DEVICE:
+KEYBUFF:
+ZDEVCNT:
+DEVCNT:
+	.segment "DATA"	
